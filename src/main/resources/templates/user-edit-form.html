@@ -9,17 +9,21 @@
 
 <form action="#" th:action="@{/user/update}" th:object="${user}" method="post">
     <input type="hidden" th:field="*{userId}"/>
-    <label>Name:</label>
-    <input type="text" th:field="*{name}">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}">
     <br>
-    <label>Email:</label>
-    <input type="email" th:field="*{email}">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}">
     <br>
-    <label>User Role:</label>
-    <select th:field="*{userRole}">
+
+    <label for="userRole">User Role:</label>
+    <select id="userRole" th:field="*{userRole}">
         <option th:each="role: ${userRoles}" th:value="${role}" th:text="${role}"></option>
     </select>
     <br>
+
     <button type="submit">Register edits</button>
 </form>
 </body>
