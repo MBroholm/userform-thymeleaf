@@ -18,9 +18,9 @@ public class UserController {
 
     @GetMapping("/users")
     public String getAllUsers(Model model){
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
-        return "showusers";
+        List<User> users = userService.getAllUsers(); //get users from service
+        model.addAttribute("users", users); //add users to model with key "users"
+        return "showusers"; //ref html
     }
 
     //Display the user registration form
@@ -32,11 +32,32 @@ public class UserController {
         return "user-registration-form";
     }
 
-    //Handle the form submission
+    // POST - Handle the form submission
     @PostMapping("/register")
     public String register(@ModelAttribute User user){
         userService.addUser(user);
         return "redirect:/user/users";
     }
 
+    //
+    @GetMapping("/edit/{userId}")
+    public String editUser(@PathVariable int userId, Model model) {
+        User user = userService.getUserById(userId);
+        if(user == null) {
+            throw new IllegalArgumentException("Invalid user id");
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("userRoles", UserRole.values());
+        return "user-edit-form";
+    }
+
+    //Handle the form submission
+    @PostMapping("/update")
+    public String editUser(@ModelAttribute User user) {
+        if(userService.updateUser(user)){
+            return "redirect:/user/users";
+        }
+
+        throw new IllegalArgumentException("User not found");
+    }
 }

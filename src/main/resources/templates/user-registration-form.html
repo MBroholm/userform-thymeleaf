@@ -9,10 +9,10 @@
 
 <form action="#" th:action="@{/user/register}" th:object="${user}" method="post">
     <label>Name</label>
-    <input type="text" th:field="*{name}">
+    <input type="text" th:field="${user.name}">
     <br>
     <label>Email</label>
-    <input type="email" th:field="*{email}">
+    <input type="email" th:field="*{email}"> <!-- * kan anvendes i stedet for at henvise til objectet 'user' -->
     <br>
     <label>User Role</label>
     <select th:field="*{userRole}">
@@ -20,9 +20,6 @@
     </select>
     <br>
     <button type="submit">Register</button>
-
-
-
 
 
 </form>

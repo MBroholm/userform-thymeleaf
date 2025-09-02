@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Edit Form</title>
+</head>
+<body>
+<h1>User Edit Form</h1>
+
+<form action="#" th:action="@{/user/update}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{userId}"/>
+    <label>Name:</label>
+    <input type="text" th:field="*{name}">
+    <br>
+    <label>Email:</label>
+    <input type="email" th:field="*{email}">
+    <br>
+    <label>User Role:</label>
+    <select th:field="*{userRole}">
+        <option th:each="role: ${userRoles}" th:value="${role}" th:text="${role}"></option>
+    </select>
+    <br>
+    <button type="submit">Register edits</button>
+</form>
+</body>
+</html>
